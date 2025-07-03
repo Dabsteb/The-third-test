@@ -61,11 +61,11 @@ const getReflectionButton = document.getElementById('get-reflection-button');
 const reflectionOutput = document.getElementById('reflection-output');
 const reflectionLoadingIndicator = document.getElementById('reflection-loading-indicator');
 
-// API ключ для Gemini [[memory:762811]]
-const GEMINI_API_KEY = "AIzaSyCeNqKnRs3unMHeyhLz_weKI0j-tEf4j7w";
+// API ключ больше не нужен на клиенте, так как он используется на сервере.
+// const GEMINI_API_KEY = "AIzaSyCeNqKnRs3unMHeyhLz_weKI0j-tEf4j7w";
 
 /**
-* Вызывает Gemini API для генерации текста.
+* Вызывает наш бэкенд для генерации текста через Gemini API.
 * @param {string} promptText - Текст промпта для модели.
 * @returns {Promise<string>} Ответ от модели в виде текста.
 */

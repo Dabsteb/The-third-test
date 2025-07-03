@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Environment Variables
+.env
+.env*.local
+!.env.example
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Production
+/build
+/dist
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Misc
+.DS_Store
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp 
