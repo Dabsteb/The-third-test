@@ -24,32 +24,6 @@ function showNotification(message, type = 'success') {
     }, 3500);
 }
 
-const SYSTEM_PROMPT_BASE = `
-Ты — умный, дружелюбный и заботливый ИИ-ассистент на сайте психолога Марины Чикаидзе.
-Твоя главная задача — предоставлять пользователям первичную поддержку и направлять их к Марине для получения полноценной консультации.
-
-**Ключевая информация, которую ты должен знать и использовать:**
-- **Психолог:** Марина Чикаидзе.
-- **Контакты для записи:**
-  - Email: marina.psy1968@gmail.com
-  - WhatsApp: +7 919 744 8522
-- **Как записаться:** Пользователь может написать на email, в WhatsApp или перейти в раздел "Связаться со мной" внизу страницы (id #contact).
-- **Цены:** Индивидуальная консультация — 3500₽, семейная/парная — 5500₽.
-
-**Правила твоего поведения:**
-1.  **Если пользователь спрашивает о записи, контактах, ценах или о Марине**, твой главный приоритет — четко предоставить запрошенную информацию.
-    - *Пример ответа на "Как записаться?":* "Записаться на консультацию к Марине очень просто! Вы можете написать ей на почту marina.psy1968@gmail.com или в WhatsApp по номеру +7 919 744 8522. Также внизу страницы есть раздел 'Связаться со мной'."
-2.  **Если пользователь описывает свою проблему (например, "чувствую стресс" или "у меня проблемы в отношениях")**, дай краткий, поддерживающий и практический совет (не более 50-60 слов). В конце мягко, но уверенно предложи записаться на консультацию для более глубокого анализа.
-    - *Пример ответа на "чувствую стресс":* "Это действительно непростое состояние. Попробуйте сделать несколько медленных, глубоких вдохов, чтобы немного успокоиться. Для детальной проработки причин вашего стресса и поиска эффективных решений, я настоятельно рекомендую записаться на консультацию к Марине."
-3.  **ЗАПРЕЩЕНО:**
-    - Использовать грубые, вульгарные или любые недопустимые выражения.
-    - Ставить медицинские диагнозы. Ты не врач.
-    - Проводить длительные терапевтические сессии. Твоя роль — ассистент, а не психолог.
-4.  Всегда будь вежливым, эмпатичным и профессиональным.
-
----
-`;
-
 // DOM Elements для AI-функций
 const quickTipInput = document.getElementById('quick-tip-input');
 const getQuickTipButton = document.getElementById('get-quick-tip-button');
@@ -61,24 +35,22 @@ const getReflectionButton = document.getElementById('get-reflection-button');
 const reflectionOutput = document.getElementById('reflection-output');
 const reflectionLoadingIndicator = document.getElementById('reflection-loading-indicator');
 
-// API ключ больше не нужен на клиенте, так как он используется на сервере.
-// const GEMINI_API_KEY = "AIzaSyCeNqKnRs3unMHeyhLz_weKI0j-tEf4j7w";
-
 /**
-* Вызывает наш бэкенд для генерации текста через Gemini API.
+* Вызывает наш бэкенд для генерации текста через AI.
 * @param {string} promptText - Текст промпта для модели.
+* @param {'tip'|'reflection'} feature - Тип запрашиваемой функции.
 * @returns {Promise<string>} Ответ от модели в виде текста.
 */
-async function callGeminiAPI(promptText) {
-    const apiUrl = '/api/generate'; // Обращаемся к нашему бэкенд-посреднику
+async function callApi(promptText, feature) {
+    const apiUrl = '/api/generate';
 
     try {
-const response = await fetch(apiUrl, {
-    method: 'POST',
+        const response = await fetch(apiUrl, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ prompt: promptText }), // Отправляем промпт на наш сервер
+            body: JSON.stringify({ prompt: promptText, feature: feature }), // Отправляем промпт и тип функции
         });
 
         if (!response.ok) {
@@ -87,13 +59,13 @@ const response = await fetch(apiUrl, {
             throw new Error(`Сервер ответил ошибкой: ${errorData.error || response.status}`);
         }
 
-const result = await response.json();
+        const result = await response.json();
 
-if (result.candidates && result.candidates.length > 0 &&
-    result.candidates[0].content && result.candidates[0].content.parts &&
-    result.candidates[0].content.parts.length > 0) {
+        if (result.candidates && result.candidates.length > 0 &&
+            result.candidates[0].content && result.candidates[0].content.parts &&
+            result.candidates[0].content.parts.length > 0) {
             return result.candidates[0].content.parts[0].text;
-} else {
+        } else {
             console.error("Неожиданный формат ответа от нашего сервера:", result);
             throw new Error("Не удалось получить корректный ответ от API.");
         }
@@ -115,15 +87,12 @@ if (getQuickTipButton) {
         quickTipOutput.innerHTML = '';
         
         try {
-            const prompt = SYSTEM_PROMPT_BASE + 
-                           `**Задача:** Проанализируй запрос пользователя и дай на него ответ, строго следуя правилам.\n` +
-                           `**Запрос пользователя:** "${problem}"`;
-    const tip = await callGeminiAPI(prompt);
+            const tip = await callApi(problem, 'tip');
             quickTipOutput.innerHTML = `<p>${tip}</p>`;
-    showNotification('Совет сгенерирован!', 'success');
-} catch (error) {
+            showNotification('Совет сгенерирован!', 'success');
+        } catch (error) {
             quickTipOutput.innerHTML = '<p class="text-center text-red-500">К сожалению, не удалось сгенерировать совет. Попробуйте переформулировать запрос или повторите попытку позже.</p>';
-    showNotification('Ошибка при генерации совета.', 'error');
+            showNotification('Ошибка при генерации совета.', 'error');
         } finally {
             quickTipLoadingIndicator.style.display = 'none';
         }
@@ -132,7 +101,7 @@ if (getQuickTipButton) {
 
 // 2. Ежедневное размышление/аффирмация
 if (getReflectionButton) {
-getReflectionButton.addEventListener('click', async () => {
+    getReflectionButton.addEventListener('click', async () => {
         const feeling = thoughtInput.value.trim();
         if (!feeling) {
             showNotification('Пожалуйста, опишите, как вы себя чувствуете.', 'error');
@@ -142,17 +111,14 @@ getReflectionButton.addEventListener('click', async () => {
         reflectionOutput.innerHTML = '';
 
         try {
-            const prompt = SYSTEM_PROMPT_BASE +
-                           `**Задача:** Проанализируй чувства пользователя и напиши короткое (3-4 предложения) позитивное и вдохновляющее размышление или аффирмацию. В конце мягко напомни о возможности записи на консультацию.\n` +
-                           `**Пользователь чувствует:** "${feeling}"`;
-    const reflection = await callGeminiAPI(prompt);
-    reflectionOutput.innerHTML = `<p>${reflection}</p>`;
-    showNotification('Размышление сгенерировано!', 'success');
-} catch (error) {
+            const reflection = await callApi(feeling, 'reflection');
+            reflectionOutput.innerHTML = `<p>${reflection}</p>`;
+            showNotification('Размышление сгенерировано!', 'success');
+        } catch (error) {
             reflectionOutput.innerHTML = '<p class="text-center text-red-500">Не удалось сгенерировать размышление. Попробуйте повторить попытку позже.</p>';
-    showNotification('Ошибка при генерации размышления.', 'error');
+            showNotification('Ошибка при генерации размышления.', 'error');
         } finally {
             reflectionLoadingIndicator.style.display = 'none';
         }
-});
+    });
 }

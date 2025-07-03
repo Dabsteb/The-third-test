@@ -221,10 +221,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Снимаем выделение со всех label в группе, чтобы подсветить только один
                         const groupName = input.name;
                         document.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
-                            radio.closest('label').classList.remove('selected');
+                            const label = radio.closest('label');
+                            // Сбрасываем стили для неактивных радио-кнопок
+                            label.classList.remove('bg-primary', 'text-white', 'border-primary');
+                            label.classList.add('border-gray-300', 'dark:border-gray-600');
                         });
                     }
-                    parent.classList.toggle('selected', input.checked);
+                    
+                    // Управляем стилями в зависимости от состояния checked
+                    if (input.checked) {
+                        parent.classList.add('bg-primary', 'text-white', 'border-primary');
+                        parent.classList.remove('border-gray-300', 'dark:border-gray-600');
+                    } else {
+                        // Это актуально для чекбоксов
+                        parent.classList.remove('bg-primary', 'text-white', 'border-primary');
+                        parent.classList.add('border-gray-300', 'dark:border-gray-600');
+                    }
 
                     saveAnswer();
                     validateStep();
