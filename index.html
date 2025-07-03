@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Психолог Марина Чикаидзе - Профессиональная помощь онлайн</title>
+    <meta name="description" content="Профессиональная психологическая помощь онлайн от Марины Чикаидзе. Индивидуальные и семейные консультации.">
+    <meta name="keywords" content="психолог, психология, онлайн консультации, Марина Чикаидзе, семейная терапия, КПТ">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (для утилит) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /*
+          Новая палитра и стили, вдохновленные Tilda.
+          Чистый, минималистичный и профессиональный вид.
+        */
+        :root {
+            --bg-light: #ffffff;
+            --bg-offset: #f8f9fa;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --primary: #4f46e5; 
+            --primary-darker: #4338ca;
+            --border-color: #dee2e6;
+            --card-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+            --card-shadow-hover: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .section-padding {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            text-align: center;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            background-color: var(--bg-light);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-darker);
+            transform: scale(1.03);
+        }
+        
+        .btn-secondary {
+            background-color: #e9ecef;
+            color: var(--text-dark);
+        }
+        .btn-secondary:hover {
+            background-color: #dee2e6;
+        }
+
+        #main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: var(--bg-light);
+            border-bottom: 1px solid var(--border-color);
+            transition: box-shadow 0.3s;
+        }
+        
+        #main-header.scrolled {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Анимации */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FAQ Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        .accordion-icon {
+            transition: transform 0.4s ease;
+        }
+        .accordion-item.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Кнопка "Наверх" */
+        #back-to-top-button {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            transform: translateY(20px);
+        }
+        #back-to-top-button.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header id="main-header" class="w-full">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="text-2xl font-bold text-gray-800">
+                    <i class="fa-solid fa-brain text-primary"></i>
+                    Марина Чикаидзе
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-base font-medium text-gray-600 hover:text-primary transition">Обо мне</a>
+                    <a href="#services" class="text-base font-medium text-gray-600 hover:text-primary transition">Услуги</a>
+                    <a href="#pricing" class="text-base font-medium text-gray-600 hover:text-primary transition">Цены</a>
+                    <a href="#faq" class="text-base font-medium text-gray-600 hover:text-primary transition">FAQ</a>
+                </nav>
+                <a href="#contact" class="hidden md:inline-block btn btn-primary text-base">Связаться</a>
+                <button id="mobile-menu-button" class="md:hidden text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-100">Обо мне</a>
+            <a href="#services" class="block py-2 px-4 text-sm hover:bg-gray-100">Услуги</a>
+            <a href="#pricing" class="block py-2 px-4 text-sm hover:bg-gray-100">Цены</a>
+            <a href="#faq" class="block py-2 px-4 text-sm hover:bg-gray-100">FAQ</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-100">Связаться</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="pt-40 pb-24 text-center">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Найдите душевное равновесие</h1>
+                <p class="section-subtitle max-w-3xl">
+                    Я — психолог, специализируюсь на семейной терапии и когнитивно-поведенческой терапии (КПТ). 
+                    Я работаю индивидуально с каждым клиентом, используя проверенные методы, чтобы помочь обрести душевное спокойствие и гармонию.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="#contact" class="btn btn-primary">Записаться на сеанс</a>
+                    <a href="#about" class="btn btn-secondary">Узнать больше</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME -->
+        <section id="about" class="section-padding bg-slate-50">
+            <div class="container mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+                        <div class="w-full h-96 bg-gray-200 rounded-lg shadow-lg flex items-center justify-center">
+                            <p class="text-gray-500">Фотография будет добавлена позже</p>
+                        </div>
+                    </div>
+                    <div class="fade-in">
+                        <h2 class="text-3xl font-bold mb-4">Марина Чикаидзе - Ваш проводник к внутренней гармонии.</h2>
+                        <p class="text-lg text-slate-600 mb-6">
+                            Я, Марина Чикаидзе, магистр психологических наук с более чем 15-летним опытом практической работы. Моя миссия — помогать людям находить внутренний покой и гармонию с собой, развивать личностный потенциал и достигать поставленных целей.
+                        </p>
+                        <div class="space-y-3">
+                           <div class="flex items-start"><i class="fa-solid fa-check-circle text-primary mt-1 mr-3"></i><span><strong class="font-semibold">Индивидуальный подход:</strong> Каждая терапия адаптируется под вас.</span></div>
+                           <div class="flex items-start"><i class="fa-solid fa-check-circle text-primary mt-1 mr-3"></i><span><strong class="font-semibold">Доказательные методы:</strong> Только научно обоснованные техники.</span></div>
+                           <div class="flex items-start"><i class="fa-solid fa-check-circle text-primary mt-1 mr-3"></i><span><strong class="font-semibold">Полная конфиденциальность:</strong> Гарантия защиты всей информации.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SERVICES -->
+        <section id="services" class="section-padding">
+             <div class="container mx-auto px-4">
+                <h2 class="section-title">Мои услуги</h2>
+                <p class="section-subtitle">Широкий спектр психологической помощи для вашего благополучия.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card text-center fade-in"><i class="fa-solid fa-person text-5xl text-primary mb-6"></i><h3 class="text-2xl font-bold mb-3">Индивидуальные консультации</h3><p class="text-slate-500">Работа над запросами: тревожность, депрессия, стресс, самооценка, личностный рост.</p></div>
+                    <div class="card text-center fade-in"><i class="fa-solid fa-people-group text-5xl text-primary mb-6"></i><h3 class="text-2xl font-bold mb-3">Семейная терапия</h3><p class="text-slate-500">Помощь в разрешении конфликтов, улучшении коммуникации и укреплении отношений.</p></div>
+                    <div class="card text-center fade-in"><i class="fa-solid fa-palette text-5xl text-primary mb-6"></i><h3 class="text-2xl font-bold mb-3">Арт-терапия онлайн</h3><p class="text-slate-500">Творческий подход к решению внутренних конфликтов через искусство и самовыражение.</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AI-POWERED TOOLS (Обновленная секция) -->
+        <section id="ai-tools" class="section-padding bg-slate-50">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title">AI-инструменты для самопомощи</h2>
+                <p class="section-subtitle">Получите быстрый совет или идею для размышления от нашего AI-помощника. Это бесплатно и анонимно.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Quick Tip -->
+                    <div class="card fade-in">
+                        <h3 class="text-xl font-bold mb-4 text-center"><i class="fa-solid fa-lightbulb text-primary mr-2"></i>Быстрый совет</h3>
+                        <p class="text-slate-500 mb-4 text-center text-sm">Опишите вашу проблему, и AI предложит практический совет.</p>
+                        <textarea id="quick-tip-input" class="w-full p-3 border rounded-md bg-slate-50 border-slate-300 mb-4 focus:ring-2 focus:ring-primary focus:border-primary" rows="3" placeholder="Например: 'Чувствую стресс на работе'"></textarea>
+                        <button id="get-quick-tip-button" class="btn btn-primary w-full">Получить совет ✨</button>
+                        <div id="quick-tip-output" class="mt-4 p-4 bg-slate-100 rounded-md text-slate-600 min-h-[50px]">Ваш совет появится здесь.</div>
+                        <div class="loading-indicator mt-4" id="quick-tip-loading-indicator" style="display: none; text-align: center;">
+                            <div class="inline-block w-6 h-6 border-4 border-t-primary border-gray-200 rounded-full animate-spin"></div>
+                            <p class="mt-2 text-sm text-slate-500">Генерируем совет...</p>
+                        </div>
+                    </div>
+                    <!-- Thought for the day -->
+                    <div class="card fade-in">
+                        <h3 class="text-xl font-bold mb-4 text-center"><i class="fa-solid fa-comment-dots text-primary mr-2"></i>Размышление дня</h3>
+                        <p class="text-slate-500 mb-4 text-center text-sm">Расскажите, как вы себя чувствуете, и получите вдохновляющую аффирмацию.</p>
+                        <textarea id="thought-input" class="w-full p-3 border rounded-md bg-slate-50 border-slate-300 mb-4 focus:ring-2 focus:ring-primary focus:border-primary" rows="3" placeholder="Например: 'уставшим', 'вдохновленным'"></textarea>
+                        <button id="get-reflection-button" class="btn btn-primary w-full">Получить размышление 🧠</button>
+                        <div id="reflection-output" class="mt-4 p-4 bg-slate-100 rounded-md text-slate-600 min-h-[50px]">Ваше размышление появится здесь.</div>
+                        <div class="loading-indicator mt-4" id="reflection-loading-indicator" style="display: none; text-align: center;">
+                            <div class="inline-block w-6 h-6 border-4 border-t-primary border-gray-200 rounded-full animate-spin"></div>
+                            <p class="mt-2 text-sm text-slate-500">Генерируем размышление...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- PRICING -->
+        <section id="pricing" class="section-padding">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title">Цены и длительность</h2>
+                <p class="section-subtitle">Прозрачное ценообразование без скрытых платежей.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Individual -->
+                    <div class="card fade-in">
+                        <h3 class="text-xl font-bold text-center mb-2">Индивидуально</h3>
+                        <p class="text-5xl font-bold text-center my-4">3 500₽</p>
+                        <p class="text-center text-slate-500 mb-6 font-semibold">50 минут</p>
+                        <ul class="space-y-4 mb-8 text-slate-600">
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Персональный разбор</li>
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Работа с тревогой, стрессом</li>
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Домашние задания</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary w-full">Записаться</a>
+                    </div>
+                    <!-- Family -->
+                    <div class="card border-2 border-primary relative fade-in">
+                         <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Популярно</div>
+                        <h3 class="text-xl font-bold text-center mb-2">Для семьи/пары</h3>
+                        <p class="text-5xl font-bold text-center my-4 text-primary">5 500₽</p>
+                        <p class="text-center text-slate-500 mb-6 font-semibold">80 минут</p>
+                        <ul class="space-y-4 mb-8 text-slate-600">
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Восстановление гармонии</li>
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Работа с конфликтами</li>
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Улучшение коммуникации</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary w-full">Выбрать этот план</a>
+                    </div>
+                     <!-- Program -->
+                    <div class="card fade-in">
+                        <h3 class="text-xl font-bold text-center mb-2">Авторская программа</h3>
+                        <p class="text-5xl font-bold text-center my-4">18 000₽</p>
+                        <p class="text-center text-slate-500 mb-6 font-semibold">6 сеансов</p>
+                        <ul class="space-y-4 mb-8 text-slate-600">
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Комплексный подход</li>
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Личностный рост</li>
+                           <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i>Долгосрочные результаты</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary w-full">Записаться</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ -->
+        <section id="quiz" class="section-padding bg-slate-50">
+            <div class="container mx-auto px-4">
+                <div class="quiz-container card max-w-4xl mx-auto fade-in">
+                    <h2 class="section-title">Анкета для первой консультации</h2>
+                    <p class="section-subtitle">Ответы на эти вопросы помогут мне лучше понять вашу ситуацию и подготовиться к нашей первой встрече. Это займет не более 5 минут.</p>
+                    
+                    <div id="quiz-content">
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                           <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <p id="progressText" class="text-center text-sm text-gray-500 mb-8">Шаг 1 из 7</p>
+                        <div id="quiz-steps-container"></div>
+                    </div>
+
+                    <div id="quiz-navigation" class="flex justify-between items-center mt-8">
+                        <button id="prevBtn" class="btn btn-secondary disabled:opacity-50">Назад</button>
+                        <button id="nextBtn" class="btn btn-primary">Далее</button>
+                        <button id="submitBtn" class="btn btn-primary hidden">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section-padding">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h2 class="section-title">Часто задаваемые вопросы</h2>
+                <p class="section-subtitle">Ответы на самые популярные вопросы о психологических консультациях.</p>
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="accordion-item border border-gray-200 rounded-lg fade-in">
+                        <div class="accordion-header flex justify-between items-center p-6 cursor-pointer">
+                            <h3 class="font-semibold text-lg">Как проходит первая консультация?</h3>
+                            <i class="accordion-icon fa-solid fa-chevron-down text-primary"></i>
+                        </div>
+                        <div class="accordion-content px-6 pb-6 text-slate-600">
+                            <p>Первая сессия — это знакомство. Мы обсуждаем ваш запрос, цели и ожидания от терапии. Это помогает мне понять вашу ситуацию и предложить наиболее подходящий план работы. Длительность — 50 минут.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="accordion-item border border-gray-200 rounded-lg fade-in">
+                         <div class="accordion-header flex justify-between items-center p-6 cursor-pointer">
+                            <h3 class="font-semibold text-lg">Гарантируется ли конфиденциальность?</h3>
+                            <i class="accordion-icon fa-solid fa-chevron-down text-primary"></i>
+                        </div>
+                        <div class="accordion-content px-6 pb-6 text-slate-600">
+                            <p>Абсолютно. Все, что обсуждается во время сессии, строго конфиденциально. Я придерживаюсь этических норм и правил психотерапии, что гарантирует полную безопасность и анонимность.</p>
+                        </div>
+                    </div>
+                     <!-- FAQ Item 3 -->
+                    <div class="accordion-item border border-gray-200 rounded-lg fade-in">
+                         <div class="accordion-header flex justify-between items-center p-6 cursor-pointer">
+                            <h3 class="font-semibold text-lg">Можно ли отменить или перенести сессию?</h3>
+                            <i class="accordion-icon fa-solid fa-chevron-down text-primary"></i>
+                        </div>
+                        <div class="accordion-content px-6 pb-6 text-slate-600">
+                            <p>Да, вы можете отменить или перенести сессию, предупредив меня не менее чем за 24 часа до назначенного времени. В противном случае сессия считается проведенной и оплачивается в полном объеме.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- FOOTER -->
+    <footer id="contact" class="section-padding bg-slate-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Свяжитесь со мной</h2>
+            <p class="max-w-xl mx-auto text-slate-300 mb-8">Готовы начать свой путь к гармонии? Напишите мне, и мы обсудим, как я могу вам помочь.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-8 text-lg">
+                <a href="mailto:marina.psy1968@gmail.com" class="hover:text-primary transition"><i class="fa-solid fa-envelope mr-2"></i>marina.psy1968@gmail.com</a>
+                <a href="https://wa.me/79197448522" class="hover:text-primary transition"><i class="fa-brands fa-whatsapp mr-2"></i>+7 919 744 8522</a>
+            </div>
+            <div class="mt-12 border-t border-slate-700 pt-8 text-sm text-slate-400">
+                <p>&copy; 2024 Марина Чикаидзе. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-button" class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center text-xl">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="firebase_auth.js" type="module" defer></script>
+    <script src="ai_chat.js" type="module" defer></script>
+    <script src="ai_features.js" type="module" defer></script>
+    <script src="notifications.js" type="module" defer></script>
+    <script src="quiz.js" type="module" defer></script>
+    <script src="main.js" defer></script>
+
+</body>
+</html> 
