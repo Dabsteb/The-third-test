@@ -424,12 +424,16 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
     <!-- Scripts -->
-    <script src="firebase_auth.js" type="module" defer></script>
-    <script src="ai_chat.js" type="module" defer></script>
-    <script src="ai_features.js" type="module" defer></script>
-    <script src="notifications.js" type="module" defer></script>
-    <script src="quiz.js" type="module" defer></script>
-    <script src="main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Deferred scripts for better loading performance and to avoid blocking -->
+    <script src="./main.js" defer></script>
+    <script src="./firebase_auth.js" defer></script>
+    <script src="./ai_chat.js" defer></script>
+    <script src="./ai_features.js" defer></script>
+    <script src="./notifications.js" defer></script>
+    <script src="./quiz.js" defer></script>
 
 </body>
 </html> 

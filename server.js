@@ -48,7 +48,7 @@ async function main() {
         }
 
         // ВАЖНО: API ключ временно здесь.
-        const DEEPSEEK_API_KEY = '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';
+        const DEEPSEEK_API_KEY = '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';
         if (!DEEPSEEK_API_KEY) {
             return res.status(500).json({ error: 'API key is not configured on the server' });
         }
